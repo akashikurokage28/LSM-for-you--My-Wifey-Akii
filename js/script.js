@@ -282,3 +282,21 @@ if (document.readyState === "loading") {
 } else {
     showLetterLines(letterArr, textPlaceholder);
 }
+
+
+// Auto-play audio on user interaction or page load
+        const audio = document.querySelector('.audio');
+
+        // Try to play on page load
+        audio.play().catch(() => {
+            console.log('Autoplay blocked. Waiting for user interaction...');
+        });
+
+        // Play on first user interaction (click, touch, key)
+        document.addEventListener('click', () => {
+            audio.play().catch(e => console.error('Play failed:', e));
+        }, { once: true });
+
+        document.addEventListener('touchstart', () => {
+            audio.play().catch(e => console.error('Play failed:', e));
+        }, { once: true });
